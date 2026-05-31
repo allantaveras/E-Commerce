@@ -1,0 +1,30 @@
+{
+  "name": "ecommerce-automation-framework",
+  "version": "1.0.0",
+  "description": "Comprehensive E-commerce Automation, API, CI/CD, AI Generator, Self-Healing, and LLM Testing Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --project=chromium --grep @ui",
+    "test:api": "playwright test --grep @api",
+    "test:self-healing": "playwright test --grep @self-healing",
+    "test:llm": "playwright test --grep @llm",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "generate-tests": "ts-node ai-generator/generator-cli.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.24",
+    "allure-commandline": "^2.27.0",
+    "allure-playwright": "^2.15.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "@faker-js/faker": "^8.4.1",
+    "dotenv": "^16.4.5",
+    "zod": "^3.22.4"
+  }
+}
