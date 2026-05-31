@@ -1,0 +1,29 @@
+name: API Tests on Merge
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright (API only, no browser binaries needed)
+        run: npx playwright install --with-deps
+
+      - name: Run API Tests
+        run: npm run test:api
+        env:
+          API_BASE_URL: https://jsonplaceholder.typicode.com
