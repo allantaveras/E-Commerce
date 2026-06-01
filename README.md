@@ -10,7 +10,7 @@ A unified, production-grade test automation and AI quality engineering repositor
 
 ---
 
-## 🏗️ Framework Architecture & CI/CD Flow
+## Framework Architecture & CI/CD Flow
 
 ```mermaid
 graph TD
@@ -27,7 +27,7 @@ graph TD
 
 ---
 
-## 📂 Project Modules Catalog
+## Project Modules Catalog
 
 ### Phase 1: Foundation — E-Commerce UI POM Framework
 
@@ -128,7 +128,7 @@ A dedicated LLM quality assurance testing module targeting AI characteristics.
 
 ---
 
-## 🛠️ Installation and Configuration
+## Installation and Configuration
 
 ### 1. Prerequisites
 Ensure you have Node.js (version 18 or 20) installed.
@@ -159,7 +159,7 @@ ANTHROPIC_API_KEY=your_anthropic_key_here
 
 ---
 
-## 🚀 Execution Guide
+## Execution Guide
 
 ### Run full regression suite:
 ```bash
