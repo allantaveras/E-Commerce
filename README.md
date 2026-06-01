@@ -2,7 +2,7 @@
 
 A unified, production-grade test automation and AI validation repository built from scratch. This framework scales from modular UI page objects and API contract testing to containerized CI/CD, AI-driven test stub generation, self-healing element locators, and LLM output quality assurance.
 
-## 🏗️ Framework Architecture (6-Phase Roadmap)
+## Framework Architecture (6-Phase Roadmap)
 
 ### [Phase 1: Foundation — E-Commerce UI POM Framework](file:///c:/Users/ricar/Desktop/ECommerce/ui)
 *   **Target Site**: [SauceDemo](https://www.saucedemo.com)
@@ -39,7 +39,7 @@ A unified, production-grade test automation and AI validation repository built f
 
 ---
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 1. **Clone the Repository** and navigate to workspace:
     ```bash
@@ -62,7 +62,7 @@ A unified, production-grade test automation and AI validation repository built f
 
 ---
 
-## 🚀 Running Tests
+## Running Tests
 
 ### Execute the complete suite:
 ```bash
@@ -89,7 +89,7 @@ npm run test
 
 ---
 
-## 📊 Generating Reports
+## Generating Reports
 
 We use **Allure Report** to compile test runs into HTML dashboards.
 
@@ -104,7 +104,7 @@ We use **Allure Report** to compile test runs into HTML dashboards.
 
 ---
 
-## 🔒 Pull Request Smoke Verification
+## Pull Request Smoke Verification
 
 Every pull request targeting the `main` branch automatically triggers the smoke test pipeline defined in `.github/workflows/smoke-pr.yml` to verify authentication security and core UI flows prior to merge.
 
