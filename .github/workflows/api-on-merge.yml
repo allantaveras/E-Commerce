@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright (API only, no browser binaries needed)
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
 
       - name: Run API Tests
         run: npm run test:api
