@@ -1,0 +1,3 @@
+[Test] Triggering click on checkout button. Watch self-healing log warnings below:
+[Self-Healing] Selector '[data-test="checkout-broken-non-existent"]' for key 'checkout.button' not found/attached. Trying next fallback...
+[Test] Successfully arrived at Checkout Info screen after locator recovery!
