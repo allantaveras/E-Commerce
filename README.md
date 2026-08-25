@@ -24,8 +24,7 @@ A unified, production-grade test automation and AI quality engineering repositor
 ## Table of Contents
 
 - [Framework Architecture](#framework-architecture--cicd-flow)
-- [Framework in Action](#framework-in-action)
-- [Project Modules Catalog](#project-modules-catalog)
+- [Framework in Action & Project Modules Catalog](#framework-in-action--project-modules-catalog)
   - [Phase 1: UI POM Framework](#phase-1-foundation--e-commerce-ui-pom-framework)
   - [Phase 2: API Automation](#phase-2-api-automation-extension)
   - [Phase 3: CI/CD & Containers](#phase-3-devops-cicd--containers)
@@ -43,7 +42,7 @@ A unified, production-grade test automation and AI quality engineering repositor
 graph TD
     A[Code Push / Pull Request] --> B{Trigger CI/CD Pipeline}
     B -- Pull Request --> C[Smoke Tests: Login & Auth UI]
-    B -- Push to Main --> D[API Integration Tests: JSONPlaceholder]
+    B -- Push to Main --> D[API Integration Tests: SauceDemo]
     B -- Nightly Cron --> E[Full Regression Suite: UI + API + LLM]
     E --> F[Generate Allure Reports]
     F --> G[Deploy to GitHub Pages]
@@ -54,55 +53,14 @@ graph TD
 
 ---
 
-## Framework in Action
+## Framework in Action & Project Modules Catalog
 
-### Phase 1 — UI Test Suite (42 Cases Passing)
+### Phase 1: Foundation — UI POM Framework (42 Cases Passing)
 > POM-based Playwright tests validating login, inventory, cart, and checkout flows against [SauceDemo](https://www.saucedemo.com).
 
 <p align="center">
   <img src="docs/screenshots/phase1-ui-tests.png" alt="Phase 1 — UI Test Suite Results" width="720" />
 </p>
-
-### Phase 2 — API Automation & Zod Schema Validation (11 Cases Passing)
-> REST API contract tests against [JSONPlaceholder](https://jsonplaceholder.typicode.com) with Zod-enforced schema validation and mocked auth flows.
-
-<p align="center">
-  <img src="docs/screenshots/phase2-api-tests.png" alt="Phase 2 — API Test Suite Results" width="720" />
-</p>
-
-### Phase 3 — CI/CD Pipeline (GitHub Actions + Docker)
-> Three automated GitHub Action workflows — smoke on PR, API on merge, full regression nightly — with Allure reports deployed to GitHub Pages.
-
-<p align="center">
-  <img src="docs/screenshots/phase3-cicd-pipeline.png" alt="Phase 3 — CI/CD Pipeline Dashboard" width="720" />
-</p>
-
-### Phase 4 — AI-Powered Test Case Generator
-> CLI tool that sends plain-text feature requirements to Claude 3.5 Sonnet and outputs structured, compilable Playwright test stubs.
-
-<p align="center">
-  <img src="docs/screenshots/phase4-ai-generator.png" alt="Phase 4 — AI Test Generator Output" width="720" />
-</p>
-
-### Phase 5 — Self-Healing Locator Recovery
-> Resilient selector engine with a prioritized fallback registry. Demonstrates live recovery from intentionally broken `data-test` attributes, with an AI-assisted DOM repair fallback.
-
-<p align="center">
-  <img src="docs/screenshots/phase5-self-healing.png" alt="Phase 5 — Self-Healing Locator Demo" width="720" />
-</p>
-
-### Phase 6 — LLM Quality & Security Testing (5 Cases Passing)
-> Dedicated AI quality assurance module testing output schema compliance, hallucination detection, prompt injection defense, and response determinism.
-
-<p align="center">
-  <img src="docs/screenshots/phase6-llm-testing.png" alt="Phase 6 — LLM Quality & Security Tests" width="720" />
-</p>
-
----
-
-## Project Modules Catalog
-
-### Phase 1: Foundation — E-Commerce UI POM Framework
 
 The UI automation layer targets the [SauceDemo](https://www.saucedemo.com) store using the Page Object Model (POM) pattern to isolate element selections from test assertions.
 
@@ -144,17 +102,27 @@ The UI automation layer targets the [SauceDemo](https://www.saucedemo.com) store
 
 ---
 
-### Phase 2: API Automation Extension
+### Phase 2: API Automation & Zod Schema Validation (11 Cases Passing)
+> REST API contract tests against [SauceDemo](https://www.saucedemo.com) API endpoints (mocked) with Zod-enforced schema validation.
 
-The API automation layer targets the [JSONPlaceholder](https://jsonplaceholder.typicode.com) endpoints. It incorporates contract verification checks and offline authentication mocking.
+<p align="center">
+  <img src="docs/screenshots/phase2-api-tests.png" alt="Phase 2 — API Test Suite Results" width="720" />
+</p>
 
-*   **[user-schema.ts](api/schemas/user-schema.ts)**: Zod contract definitions including `UserSchema` (nested company, address, geo structure), `PostSchema`, `LoginSuccessSchema`, `RegisterSuccessSchema`, and `ErrorResponseSchema`.
-*   **[placeholder-client.ts](api/clients/placeholder-client.ts)**: Exposes API handlers for REST operations (`getUsers()`, `getUser(id)`, `createPost(title, body, userId)`, `updatePost(id, title, body, userId)`, `deletePost(id)`). Implements a `MockAPIResponse` class to test authorization loops (`/api/login`, `/api/register`) locally and offline.
-*   **[placeholder.spec.ts](api/tests/placeholder.spec.ts)** (11 cases): Verifies schema structure on list requests, single resource fetches, 404 response codes, CRUD operations, registration validation errors, and login token exchanges.
+The API automation layer targets the [SauceDemo](https://www.saucedemo.com) mocked endpoints. It incorporates contract verification checks and offline authentication mocking.
+
+*   **[saucedemo-schema.ts](api/schemas/saucedemo-schema.ts)**: Zod contract definitions including `ProductSchema`, `CartItemSchema`, `LoginSuccessSchema`, `LoginRequestSchema`, and `ErrorResponseSchema`.
+*   **[saucedemo-client.ts](api/clients/saucedemo-client.ts)**: Exposes API handlers for REST operations (`login()`, `getProducts()`, `getProduct(id)`, `addToCart(productId, quantity)`). Implements a `MockAPIResponse` class to test authorization and product APIs locally and offline.
+*   **[saucedemo.spec.ts](api/tests/saucedemo.spec.ts)**: Verifies schema structure on product lists requests, single resource fetches, 404 response codes, cart additions, validation errors, and login token exchanges.
 
 ---
 
 ### Phase 3: DevOps CI/CD & Containers
+> Three automated GitHub Action workflows — smoke on PR, API on merge, full regression nightly — with Allure reports deployed to GitHub Pages.
+
+<p align="center">
+  <img src="docs/screenshots/phase3-cicd-pipeline.png" alt="Phase 3 — CI/CD Pipeline Dashboard" width="720" />
+</p>
 
 *   **GitHub Action Workflows ([`.github/workflows/`](.github/workflows/))**:
     *   **[smoke-pr.yml](.github/workflows/smoke-pr.yml)**: Fires on pull requests. Runs UI smoke tests (`@login` tagged suites) on a headless Chromium runner.
@@ -167,6 +135,11 @@ The API automation layer targets the [JSONPlaceholder](https://jsonplaceholder.t
 ---
 
 ### Phase 4: AI-Powered Test Case Generator
+> CLI tool that sends plain-text feature requirements to Claude 3.5 Sonnet and outputs structured, compilable Playwright test stubs.
+
+<p align="center">
+  <img src="docs/screenshots/phase4-ai-generator.png" alt="Phase 4 — AI Test Generator Output" width="720" />
+</p>
 
 An AI automation tool that converts plain-text feature requirements into structured test cases and executable Playwright POM test stubs.
 
@@ -177,7 +150,12 @@ An AI automation tool that converts plain-text feature requirements into structu
 
 ---
 
-### Phase 5: Self-Healing Automation
+### Phase 5: Self-Healing Locator Recovery
+> Resilient selector engine with a prioritized fallback registry. Demonstrates live recovery from intentionally broken `data-test` attributes, with an AI-assisted DOM repair fallback.
+
+<p align="center">
+  <img src="docs/screenshots/phase5-self-healing.png" alt="Phase 5 — Self-Healing Locator Demo" width="720" />
+</p>
 
 A selector resilience setup designed to recover tests automatically when developers change frontend element properties.
 
@@ -187,7 +165,12 @@ A selector resilience setup designed to recover tests automatically when develop
 
 ---
 
-### Phase 6: LLM Quality & Security Testing
+### Phase 6: LLM Quality & Security Testing (5 Cases Passing)
+> Dedicated AI quality assurance module testing output schema compliance, hallucination detection, prompt injection defense, and response determinism.
+
+<p align="center">
+  <img src="docs/screenshots/phase6-llm-testing.png" alt="Phase 6 — LLM Quality & Security Tests" width="720" />
+</p>
 
 A dedicated LLM quality assurance testing module targeting AI characteristics.
 
@@ -226,7 +209,7 @@ cp .env.example .env
 Create a `.env` file in the root directory:
 ```ini
 BASE_URL=https://www.saucedemo.com
-API_BASE_URL=https://jsonplaceholder.typicode.com
+API_BASE_URL=https://www.saucedemo.com/api
 ANTHROPIC_API_KEY=your_anthropic_key_here
 ```
 
