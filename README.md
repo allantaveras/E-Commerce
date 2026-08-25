@@ -1,5 +1,5 @@
 
-# Unified Test Automation & AI Quality Engineering Framework
+# Unified Test Automation & AI Quality Engineering Framework (QAccelerator)
 
 <!-- Badges Row 1: Build & Core Stack -->
 [![Build Status](https://github.com/allantaveras/E-Commerce/actions/workflows/regression-nightly.yml/badge.svg)](https://github.com/allantaveras/E-Commerce/actions)
